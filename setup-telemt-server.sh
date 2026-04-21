@@ -996,9 +996,9 @@ ${C_BOLD}📋 ПОЛЕЗНЫЕ КОМАНДЫ:${C_RESET}
   curl -s http://127.0.0.1:9091/v1/users            | jq -r '.data[] | "[\(.username)]", (.links.tls[]? | "tls: \(.)"), ""'
 
   ${C_CYAN}# Telemt-shaper${C_RESET}
-  journalctl -u ip-shaper -f         # логи в реальном времени
-  tail -f /var/log/ip-shaper.log     # события шейпа
-  systemctl restart ip-shaper        # graceful рестарт
+  journalctl -u telemt-shaper -f         # логи в реальном времени
+  tail -f /var/log/telemt-shaper.log     # события шейпа
+  systemctl restart telemt-shaper        # graceful рестарт
 
   ${C_CYAN}# Firewall (nftables)${C_RESET}
   nft list ruleset                                   # все правила
