@@ -208,8 +208,12 @@ fi
 # =================================================================
 # [2] SSH
 # =================================================================
-if [[ "$DO_SSH" == "1" ]]; then
+if [[ "$DO_SSH" == "1" ]]; thenif [[ "$DO_SSH" == "1" ]]; then
     step 2 "Тюнинг SSH (порт $SSH_PORT)"
+
+    # Запоминаем текущий порт sshd ДО любых изменений —
+    # нужно, чтобы не убить собственную ssh-сессию через fuser -k.
+    OLD_SSH_PORT=$(ss -tlnpH 2>/dev/null | awk '/sshd/{n=split($4,a,":"); print a[n]; exit}')
 
     systemctl stop ssh.socket 2>/dev/null || true
     systemctl disable ssh.socket 2>/dev/null || true
@@ -231,7 +235,11 @@ AcceptEnv LANG LC_*
 Subsystem sftp /usr/lib/openssh/sftp-server
 EOF
 
-    fuser -k "${SSH_PORT}/tcp" > /dev/null 2>&1 || true
+    # fuser -k только если порт реально меняется.
+    # Иначе убьём свой же sshd (fuser шлёт SIGKILL всему, что держит порт).
+    if [[ -n "$OLD_SSH_PORT" && "$OLD_SSH_PORT" != "$SSH_PORT" ]]; then
+        fuser -k "${SSH_PORT}/tcp" > /dev/null 2>&1 || true
+    fi
 
     systemctl daemon-reload
     systemctl enable ssh > /dev/null 2>&1
