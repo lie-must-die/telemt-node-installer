@@ -772,6 +772,7 @@ fi
 # =================================================================
 if [[ "$DO_TELEMT" == "1" ]]; then
     step 14 "Установка Telemt"
+    # Тихая установка с базовыми параметрами. Финальный конфиг зальём ниже.
     if curl -fsSL https://raw.githubusercontent.com/telemt/telemt/main/install.sh | \
         sh -s -- -l ru -d "$TELEMT_DOMAIN" -p "$TELEMT_PORT"; then
         info "Telemt установлен"
