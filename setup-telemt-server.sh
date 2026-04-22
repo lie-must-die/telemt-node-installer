@@ -841,11 +841,15 @@ me_adaptive_floor_max_warm_writers_per_core = 128
 me_adaptive_floor_max_active_writers_global = 512
 me_adaptive_floor_max_warm_writers_global = 512
 me_adaptive_floor_max_extra_writers_multi_per_core = 3
-me_route_channel_capacity = 4096
-me_writer_cmd_channel_capacity = 16384
-me_c2me_channel_capacity = 4096
+#me_route_channel_capacity = 4096
+#me_writer_cmd_channel_capacity = 16384
+#me_c2me_channel_capacity = 4096
 me_route_blocking_send_timeout_ms = 500
 me_route_hybrid_max_wait_ms = 5000
+direct_relay_copy_buf_s2c_bytes = 65536
+crypto_pending_buffer = 65536
+direct_relay_copy_buf_c2s_bytes = 32768
+me_d2c_frame_buf_shrink_threshold_bytes = 65536
 ${AD_TAG_LINE}
 
 [general.modes]
