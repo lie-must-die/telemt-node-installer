@@ -323,7 +323,7 @@ net.ipv4.tcp_congestion_control = bbr
 
 # Backlog / очереди
 net.core.netdev_max_backlog = 250000
-net.ipv4.tcp_max_syn_backlog = 16384
+net.ipv4.tcp_max_syn_backlog = 65535
 net.core.somaxconn = 65535
 
 # Буферы
@@ -772,11 +772,21 @@ fi
 # =================================================================
 if [[ "$DO_TELEMT" == "1" ]]; then
     step 14 "Установка Telemt"
-    # Тихая установка с базовыми параметрами. Финальный конфиг зальём ниже.
     if curl -fsSL https://raw.githubusercontent.com/telemt/telemt/main/install.sh | \
         sh -s -- -l ru -d "$TELEMT_DOMAIN" -p "$TELEMT_PORT"; then
         info "Telemt установлен"
         STATUS[14]="ok"
+
+        # Даём telemt-юзеру права на netfilter через setcap
+        if id telemt &>/dev/null; then
+            NFT_REAL=$(readlink -f /usr/sbin/nft 2>/dev/null || true)
+            IPT_REAL=$(readlink -f /usr/sbin/xtables-nft-multi 2>/dev/null || \
+                       readlink -f /usr/sbin/iptables 2>/dev/null || true)
+            [[ -n "$NFT_REAL" ]] && setcap cap_net_admin+eip "$NFT_REAL" \
+                && info "setcap nft: ok" || warn "setcap nft: пропущено"
+            [[ -n "$IPT_REAL" ]] && setcap cap_net_admin+eip "$IPT_REAL" \
+                && info "setcap iptables: ok" || warn "setcap iptables: пропущено"
+        fi
     else
         err "Установка Telemt завершилась с ошибкой"
         STATUS[14]="fail"
