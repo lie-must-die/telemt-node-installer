@@ -347,6 +347,7 @@ net.ipv4.tcp_fastopen = 3
 net.ipv4.tcp_syncookies = 1
 net.ipv4.tcp_synack_retries = 2
 net.ipv4.tcp_syn_retries = 3
+net.netfilter.nf_conntrack_max = 262144
 
 # Ресурсы
 fs.file-max = 2097152
