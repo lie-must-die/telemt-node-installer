@@ -12,6 +12,23 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 # =================================================================
+# Bootstrap зависимости (гарантия запуска на чистой системе)
+# =================================================================
+BOOTSTRAP_PKGS=()
+
+for pkg in jq curl ca-certificates openssl; do
+    if ! dpkg -s "$pkg" >/dev/null 2>&1; then
+        BOOTSTRAP_PKGS+=("$pkg")
+    fi
+done
+
+if [[ ${#BOOTSTRAP_PKGS[@]} -gt 0 ]]; then
+    echo "[BOOTSTRAP] Устанавливаю: ${BOOTSTRAP_PKGS[*]}"
+    apt-get update -q
+    apt-get install -y -q "${BOOTSTRAP_PKGS[@]}"
+fi
+
+# =================================================================
 # Цвета и хелперы
 # =================================================================
 C_RESET=$'\033[0m'
