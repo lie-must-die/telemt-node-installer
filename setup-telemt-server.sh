@@ -830,10 +830,10 @@ if [[ "$DO_TELEMT_CONF" == "1" && -d /etc/telemt ]]; then
 [general]
 log_level = "silent"
 me_keepalive_enabled = true
-me_keepalive_interval_secs = 25
-me_keepalive_jitter_secs = 5
+me_keepalive_interval_secs = 8
+me_keepalive_jitter_secs = 2
 me_hardswap_warmup_delay_min_ms = 500
-me_hardswap_warmup_delay_max_ms = 2000
+me_hardswap_warmup_delay_max_ms = 1000
 me_hardswap_warmup_extra_passes = 2
 me_reconnect_max_concurrent_per_dc = 16
 me_adaptive_floor_max_active_writers_per_core = 128
