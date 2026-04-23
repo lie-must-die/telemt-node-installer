@@ -139,7 +139,7 @@ EXTERNAL_IP=$(get_external_ip || true)
 
 echo
 echo -e "${C_BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-echo -e "  Регистрация прокси в @MTProxyAdminBot (для получения ad_tag)"
+echo -e "  Регистрация прокси в @MTProxyBot (для получения ad_tag)"
 echo -e "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${C_RESET}"
 echo
 echo "  1. Открой в Telegram: ${C_CYAN}@MTProxyAdminBot${C_RESET}"
