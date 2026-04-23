@@ -16,7 +16,7 @@ fi
 # =================================================================
 BOOTSTRAP_PKGS=()
 
-for pkg in jq curl ca-certificates openssl; do
+for pkg in jq curl ca-certificates openssl sudo; do
     if ! dpkg -s "$pkg" >/dev/null 2>&1; then
         BOOTSTRAP_PKGS+=("$pkg")
     fi
