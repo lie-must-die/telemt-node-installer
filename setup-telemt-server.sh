@@ -836,8 +836,8 @@ if [[ "$DO_TELEMT_LIMITS" == "1" && -f /etc/systemd/system/telemt.service ]]; th
     cat > /etc/systemd/system/telemt.service.d/limits.conf <<'EOF'
 [Service]
 LimitNOFILE=1048576
-ExecStartPre=+/sbin/setcap cap_net_admin+eip /usr/sbin/nft
-ExecStartPre=+/sbin/setcap cap_net_admin+eip /usr/sbin/xtables-nft-multi
+ExecStartPre=+-/sbin/setcap cap_net_admin+eip /usr/sbin/nft
+ExecStartPre=+-/sbin/setcap cap_net_admin+eip /usr/sbin/xtables-nft-multi
 EOF
     systemctl daemon-reload
     info "LimitNOFILE и автоматическая выдача прав (setcap) применены"
