@@ -855,10 +855,10 @@ me_hardswap_warmup_delay_min_ms = 500
 me_hardswap_warmup_delay_max_ms = 1000
 me_hardswap_warmup_extra_passes = 2
 me_reconnect_max_concurrent_per_dc = 16
-me_adaptive_floor_max_active_writers_per_core = 128
-me_adaptive_floor_max_warm_writers_per_core = 128
-me_adaptive_floor_max_active_writers_global = 512
-me_adaptive_floor_max_warm_writers_global = 512
+#me_adaptive_floor_max_active_writers_per_core = 128
+#me_adaptive_floor_max_warm_writers_per_core = 128
+#me_adaptive_floor_max_active_writers_global = 512
+#me_adaptive_floor_max_warm_writers_global = 512
 me_adaptive_floor_max_extra_writers_multi_per_core = 3
 #me_route_channel_capacity = 4096
 #me_writer_cmd_channel_capacity = 16384
@@ -869,6 +869,8 @@ direct_relay_copy_buf_s2c_bytes = 65536
 crypto_pending_buffer = 65536
 direct_relay_copy_buf_c2s_bytes = 32768
 me_d2c_frame_buf_shrink_threshold_bytes = 65536
+me2dc_fallback = false #временно пока нет фикса фолбэка
+
 ${AD_TAG_LINE}
 
 [general.modes]
