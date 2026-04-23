@@ -795,17 +795,20 @@ if [[ "$DO_TELEMT" == "1" ]]; then
 fi
 
 # =================================================================
-# [15] Drop-in LimitNOFILE для telemt
+# [15] Drop-in LimitNOFILE и setcap для telemt
 # =================================================================
 if [[ "$DO_TELEMT_LIMITS" == "1" && -f /etc/systemd/system/telemt.service ]]; then
-    step 15 "Drop-in LimitNOFILE=1048576 для telemt"
+    step 15 "Drop-in LimitNOFILE и автоматический setcap"
     mkdir -p /etc/systemd/system/telemt.service.d
     cat > /etc/systemd/system/telemt.service.d/limits.conf <<'EOF'
 [Service]
 LimitNOFILE=1048576
+ExecStartPre=+/sbin/setcap cap_net_admin+eip /usr/sbin/nft
+ExecStartPre=+/sbin/setcap cap_net_admin+eip /usr/sbin/xtables-nft-multi
+ExecStartPre=+/sbin/setcap cap_net_admin+eip /usr/sbin/iptables
 EOF
     systemctl daemon-reload
-    info "LimitNOFILE=1048576 применён через drop-in"
+    info "LimitNOFILE и автоматическая выдача прав (setcap) применены"
     STATUS[15]="ok"
 elif [[ "$DO_TELEMT_LIMITS" == "1" ]]; then
     warn "telemt.service не найден, drop-in не создан"
