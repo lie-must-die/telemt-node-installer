@@ -216,7 +216,7 @@ if [[ "$DO_APT" == "1" ]]; then
     apt-get update -q
     apt-get upgrade -y -q
     apt-get install -y -q \
-        fail2ban curl wget sed logrotate landscape-common psmisc \
+        fail2ban curl wget sed logrotate psmisc \
         nftables conntrack jq
     info "Пакеты установлены"
     STATUS[1]="ok"
