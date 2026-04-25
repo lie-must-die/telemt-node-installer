@@ -255,7 +255,7 @@ DO_TELEMT=$(ask_do         "[14] Установка Telemt?"                    
 DO_TELEMT_LIMITS=$(ask_do  "[15] Drop-in LimitNOFILE=1048576 для telemt?"           "y")
 DO_TELEMT_CONF=$(ask_do    "[16] Залить кастомный config.toml для telemt?"          "y")
 DO_TELEMT_RESTART=$(ask_do "[17] Перезапустить telemt после настройки?"             "y")
-DO_TELEMT_TIMER=$(ask_do   "[18] Авто-рестарт telemt по таймеру?"                   "n")
+DO_TELEMT_TIMER=$(ask_do   "[18] Авто-рестарт telemt по таймеру?"                   "y")
 DO_SHAPER=$(ask_do         "[19] Установка telemt-shaper?"                          "y")
 
 # =================================================================
