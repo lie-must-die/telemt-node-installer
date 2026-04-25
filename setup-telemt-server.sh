@@ -1166,7 +1166,7 @@ fi
 # =================================================================
 if [[ "$DO_TELEMT_RESTART" == "1" ]]; then
     step 17 "Перезапуск telemt"
-    if systemctl list-unit-files | grep -q '^telemt\.service'; then
+    if [[ -f /etc/systemd/system/telemt.service ]]; then
         systemctl daemon-reload
         if systemctl restart telemt; then
             sleep 2
@@ -1193,7 +1193,7 @@ fi
 if [[ "$DO_TELEMT_TIMER" == "1" ]]; then
     step 18 "Авто-рестарт telemt каждые ${TIMER_INTERVAL}"
 
-    if ! systemctl list-unit-files | grep -q '^telemt\.service'; then
+    if [[ ! -f /etc/systemd/system/telemt.service ]]; then
         warn "telemt.service не найден — таймер не создан"
         STATUS[18]="skip"
     else
